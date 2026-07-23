@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caterina Morelli | Research Fellow</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+:root{
+  --paper:#f4daf8;--paper-2:#ffffff;--ink:#3b241b;--muted:#6b5b55;--line:#e8ddd3;--timeline:#53463a;
+  --accent:#a99bd3;--accent-dark:#5f4aa0;--sage:#b4d794;--cream:#efe59b;--pink:#f9c0ce;
+  --sky:#b4d794;--sand:#e8bd8d;--terracotta:#c08662;--petrol:#174f55;
+  --shadow:0 18px 50px rgba(59,36,27,.12);--shadow-soft:0 10px 30px rgba(59,36,27,.08);
+  --radius:26px;--max:1180px;--serif:Georgia,"Times New Roman",serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+html[data-theme="dark"]{--paper:#094147;--paper-2:#171414;--ink:#f8f2ed;--muted:#c5b9b2;--line:#444444;--timeline:#aaaaaa;
+  --petrol:#dca6f9;--accent:#c8bdf0;--accent-dark:#d9d2f7;--shadow:0 18px 50px rgba(0,0,0,.3);
+  --shadow-soft:0 10px 30px rgba(0,0,0,.22)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:94px}
+body{margin:0;color:var(--ink);font-family:var(--sans);
+  line-height:1.64;background:radial-gradient(circle at 10% 2%,rgba(169,155,211,.15),transparent 28rem),
+  radial-gradient(circle at 94% 9%,rgba(158,213,220,.25),transparent 26rem),var(--paper)}
+
+a{color:var(--petrol);text-decoration-thickness:.08em;text-underline-offset:.18em}
+
+img,svg{display:block;max-width:100%}
+.container{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+.skip-link{position:fixed;z-index:1000;top:12px;left:12px;padding:10px 14px;border-radius:12px;background:var(--accent-dark);color:white;transform:translateY(-160%)}
+.skip-link:focus{transform:none}
+.site-header{position:sticky;z-index:10000;top:0;border-bottom:1px solid transparent;background:color-mix(in srgb,var(--paper-2) 90%,transparent);backdrop-filter:blur(18px)}
+.site-header.is-scrolled{border-color:var(--line);box-shadow:0 8px 30px rgba(59,36,27,.06)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:inline-flex;align-items:center;gap:12px;font-weight:850;text-decoration:none}
+.brand-mark{width:38px;aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--ink);border-radius:50%;font-family:var(--serif);font-size:.9rem;box-shadow:4px 4px 0 var(--sage)}
+.nav-links{display:flex;align-items:center;gap:21px;margin:0;padding:0;list-style:none}
+.nav-links a{color:var(--muted);font-size:.88rem;font-weight:720;text-decoration:none}
+.nav-links a:hover,.nav-links a.is-active{color:var(--petrol)}
+.nav-actions{display:flex;gap:9px}
+.icon-button{width:42px;aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--ink);background:var(--paper-2);cursor:pointer}
+
+.menu-button{display:none}
+.hero{min-height:calc(100svh - 76px);display:grid;align-items:center;padding:72px 0 64px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(340px,.94fr);align-items:center;gap:clamp(44px,7vw,100px)}
+.eyebrow{color:var(--accent-dark);font-size:.78rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:clamp(3rem, 6vw, 5.5rem);font-weight:500;line-height:.9;letter-spacing:-.06em;margin:16px 0 22px}
+.hero .muted{font-family:var(--serif);font-size:clamp(0.9rem,1.45vw,1.1rem);color:var(--muted);max-width:730px; line-height: 1.65;}
+.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}
+.btn,
+.button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;padding:0 19px;border:1px solid var(--petrol);border-radius:999px;font-weight:820;text-decoration:none;background:var(--paper-2);color:var(--petrol)}
+.btn.primary,
+.button.primary{color:var(--paper);background:var(--petrol)}
+.btn:hover,.button:hover{transform:translateY(-3px);box-shadow:5px 5px 0 var(--sage);text-decoration:none}
+.portrait-card{position:relative;width:min(100%,470px);margin:auto;padding:20px;border:1px solid var(--line);border-radius:34px;background:var(--paper-2);box-shadow:var(--shadow);transform:rotate(0deg)}
+.portrait-card:before{content:"";position:absolute;z-index:-1;inset:16px -15px -15px 15px;border:1px solid var(--ink);border-radius:34px;background:linear-gradient(135deg,var(--lavender-light,#eee8fa),var(--sky))}
+.photo{width:100%;aspect-ratio:1/1.12;object-fit:cover;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--sky),var(--sand))}
+
+main section.content-section{padding:15px 0;border-top:0px solid var(--line)}
+.section-head{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:46px;margin-bottom:48px}
+.section-head h2{font-family:var(--serif);font-size:clamp(2rem,4.1vw,3.9rem);font-weight:500;line-height:1;letter-spacing:-.045em;margin:0; margin-top:30px;white-space: nowrap;}
+.section-head p{align-self:end;color:var(--muted);font-family:var(--serif);font-size:1.18rem;margin:0; white-space: nowrap;}
+.panel{border:1px solid var(--line);border-radius:var(--radius);background:color-mix(in srgb,var(--paper-2) 91%,transparent);box-shadow:var(--shadow-soft)}
+.content-card{padding:clamp(26px,4vw,42px)}
+.about-copy p{font-family:var(--serif);font-size:clamp(0.95rem,1.3vw,1.1rem);line-height:1.45;color:var(--muted)}
+
+.timeline{position:relative;margin-left:10px}
+.timeline:before{content:"";position:absolute;top:10px;bottom:10px;left:164px;width:1px;background:var(--timeline)}
+.timeline-item{display:grid;grid-template-columns:140px 1fr;gap:48px;padding:0 0 48px}
+.timeline-date{color:var(--muted);font-family:var(--serif);text-align:right;font-size:.87rem}
+.timeline-content{position:relative;padding-left:18px}
+.timeline-content:before{content:"";position:absolute;top:7px;left:-31px;width:13px;aspect-ratio:1;border:3px solid var(--paper);border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.timeline-content h3{font-family:var(--serif);font-size:1.35rem;margin:0 0 7px}
+.timeline-content p{color:var(--muted);margin:0 0 8px}
+
+.research-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.paper-card{grid-column:span 4;min-height:290px;display:flex;flex-direction:column;padding:28px;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-2);box-shadow:var(--shadow-soft)}
+.paper-card.featured{color:var(--ink);border-color:color-mix(in srgb,var(--accent-dark) 42%,var(--line));}
+.paper-topline{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:30px}
+.paper-series{font-size:.7rem;font-weight:820;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.paper-status{padding:5px 9px;border:1px solid currentColor;border-radius:999px;font-size:.68rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.paper-card h3{font-family:var(--serif);font-size:1.55rem;font-weight:500;line-height:1.17;margin:0 0 12px}
+.paper-card p{color:var(--muted)}
+.working-panel{margin-top:20px}
+.working-panel h3,
+.content-card h3{font-family:var(--serif);font-size:1.75rem;font-weight:500;margin:0 0 18px}
+.clean{list-style:none;padding:0;margin:0}
+.item{padding:16px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item-title{font-weight:850}
+.meta{color:var(--muted);font-size:.92rem}
+.publication-stack{display:grid;gap:18px}
+.publication-stack .content-card{width:100%}
+.network-stack{display:grid;grid-template-columns:.72fr 1.28fr;gap:20px}
+.conference-list{list-style:none;padding:0;margin:8px 0 0}
+.conference-list li{padding:7px 0;line-height:1.4}
+.conference-list span{color:var(--muted);font-size:.91rem}
+.content-card h4{margin:24px 0 7px;color:var(--accent-dark);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.two-column{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+#travel-map{width:100%;height:650px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.map-legend{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0;color:var(--muted);font-size:.92rem}
+.legend-pill{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.pin-lived,
+.pin-travel{width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid white;box-shadow:0 5px 14px rgba(0,0,0,.25)}
+.pin-lived{background:#60398d}
+.pin-travel{background:#f4a5ba}
+.pin-lived:after,.pin-travel:after{content:"";position:absolute;width:9px;height:9px;background:white;border-radius:50%;left:7.5px;top:7.5px}
+.leaflet-tooltip{border:0;border-radius:16px;padding:10px 12px;box-shadow:0 8px 25px rgba(0,0,0,.18);color:#3b241b;font-family:inherit}
+.tooltip-city{font-weight:900;color:#174f55;margin-bottom:3px}
+.contact-panel{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;padding:clamp(32px,6vw,68px);border-radius:36px;color:white;background:radial-gradient(circle at 84% 4%,rgba(169,155,211,.38),transparent 24rem),linear-gradient(135deg,#174f55,#102f33);box-shadow:var(--shadow)}
+.contact-panel h2{font-family:var(--serif);font-size:clamp(2rem,4.1vw,3.9rem);font-weight:500;line-height:1;margin:0}
+.contact-panel .content-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);box-shadow:none}
+.contact-panel p{color:rgba(255,255,255,.82)}
+.contact-panel a{color:white}
+
+
+.contact-panel {position: relative;overflow: hidden;display: grid;grid-template-columns: minmax(220px, 0.65fr) minmax(580px, 1.35fr);align-items: start;
+  gap: clamp(28px, 4vw, 56px);padding: clamp(28px, 4vw, 48px);border: 1px solid rgba(255, 255, 255, 0.08);border-radius: 30px; color: #ffffff;
+  background:radial-gradient(circle at 88% 5%, rgba(169, 155, 211, 0.34), transparent 23rem),linear-gradient(135deg, #174f55 0%,#123f44 55%, #102f33 100%);  box-shadow: var(--shadow);}
+.contact-heading {padding-top: 4px}
+.contact-kicker {display: inline-flex;align-items: center;gap: 9px;margin-bottom: 15px;color: rgba(255, 255, 255, 0.62);font-size: 0.7rem;font-weight: 700;letter-spacing: 0.14em;text-transform: uppercase;}
+.contact-kicker::before {content: "";width: 24px;height: 1px;background: rgba(255, 255, 255, 0.45);}
+.contact-panel h2 {margin: 0;font-family: var(--serif);font-size: clamp(2.8rem, 4.5vw, 4.5rem); font-weight: 500;line-height: 1;letter-spacing: -0.025em;}
+.contact-card {min-width: 0;padding: clamp(24px, 2.8vw, 34px);border: 1px solid rgba(255, 255, 255, 0.16);border-radius: 22px;background: rgba(255, 255, 255, 0.075);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 16px 38px rgba(4, 23, 26, 0.08);  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);}
+.contact-block{display: flex; flex-direction: column; align-items: flex-start;}
+.contact-label {margin-bottom: 7px;color: rgba(255, 255, 255, 0.56);font-size: 0.69rem;font-weight: 700;letter-spacing: 0.12em;text-transform: uppercase;}
+.contact-main { margin: 0;  color: #ffffff; font-size: clamp(0.98rem, 1.15vw, 1.1rem); font-weight: 650; line-height: 1.45;}
+.contact-secondary {margin: 5px 0 0;color: rgba(255, 255, 255, 0.68);font-size: 0.92rem;line-height: 1.5;}
+.contact-separator {height: 1px;margin: 19px 0;background: linear-gradient(90deg,rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03));}
+.contact-panel a {color: #ffffff;}
+.contact-email {color: #ffffff;font-size: 1rem;font-weight: 600;text-decoration-color: rgba(255, 255, 255, 0.35);text-underline-offset: 5px;transition:opacity 0.2s ease,text-decoration-color 0.2s ease;}
+.contact-email:hover {opacity: 0.75;text-decoration-color: #ffffff;}
+.contact-links {display: flex;flex-wrap: wrap;gap: 10px;margin-top: 24px;}
+.contact-links a {display: inline-flex;align-items: center;gap: 7px;padding: 9px 14px;border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;background: rgba(255, 255, 255, 0.06);color: #ffffff;font-size: 0.83rem;font-weight: 650;text-decoration: none;
+  transition:transform 0.2s ease,background 0.2s ease,border-color 0.2s ease;}
+.contact-links a span {color: rgba(255, 255, 255, 0.65);transition: transform 0.2s ease;}
+.contact-links a:hover {transform: translateY(-2px);border-color: rgba(255, 255, 255, 0.27);background: rgba(255, 255, 255, 0.12);}
+.contact-links a:hover span {
+  transform: translate(1px, -1px);}
+
+@media (min-width: 1120px) {
+  .university-name {white-space: nowrap;}}
+
+@media (max-width: 1050px) {
+  .contact-panel {grid-template-columns: minmax(190px, 0.55fr) minmax(0, 1.45fr);}
+  .university-name {white-space: normal;}}
+
+@media (max-width: 760px) {
+  .contact-panel {grid-template-columns: 1fr;gap: 24px;padding: 28px;border-radius: 24px;}
+  .contact-card {padding: 24px;border-radius: 18px;}
+  .contact-panel h2 {font-size: clamp(2.8rem, 14vw, 4rem);}}
+
+@media (max-width: 480px) {
+  .contact-panel {padding: 24px 18px;}
+  .contact-card {padding: 22px 18px;}
+  .contact-links {gap: 8px;}
+  .contact-links a {padding: 8px 12px;font-size: 0.8rem;}}
+
+
+footer{padding:38px 22px 46px;text-align:center;color:var(--muted)}
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}[data-reveal].is-visible{opacity:1;transform:none}
+@media(max-width:1050px){.research-grid{grid-template-columns:1fr 1fr}
+.paper-card{grid-column:auto}
+.three-grid{grid-template-columns:1fr 1fr}
+.network-stack{grid-template-columns:1fr}}
+@media(max-width:920px){.nav-links{position:fixed;top:76px;right:20px;left:20px;display:none;padding:16px;border:1px solid var(--line);border-radius:22px;background:var(--paper-2);box-shadow:var(--shadow)}
+.nav-links.is-open{display:grid}
+.nav-links a{padding:10px}
+.menu-button{display:grid}
+.hero-grid,.section-head,.contact-panel{grid-template-columns:1fr}
+.hero{min-height:auto}
+.research-grid,.three-grid,.two-column{grid-template-columns:1fr}
+.portrait-card{max-width:440px}}
+@media(max-width:650px){.container{width:min(calc(100% - 28px),var(--max))}
+.brand span:last-child{display:none}
+.hero{padding-top:48px}
+.timeline:before{left:7px}
+.timeline-item{grid-template-columns:1fr;gap:7px;padding-left:34px}
+.timeline-date{text-align:left}
+.timeline-content{padding-left:0}
+.timeline-content:before{top:-26px;left:-33px}#travel-map{height:520px}
+.contact-panel{padding:30px 22px}}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.project-card h3 {
+  margin: 0;
+}
+
+.project-details {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.project-detail {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+
+.project-detail dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-detail dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.project-description {
+  padding-top: 18px;
+  border-top: 1px solid rgba(20, 55, 60, 0.12);
+}
+
+.project-label {
+  display: block;
+  margin-bottom: 10px;
+
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-description p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+}
+
+.project-description p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+  .project-detail {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}[data-reveal]{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" id="top">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">CM</span><span>Caterina Morelli</span></a>
+    <ul class="nav-links" id="nav-links">
+      <!--<li><a href="#about">About me</a></li> -->
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#network">Network</a></li>
+      <li><a href="#project">Projects</a></li>
+      <li><a href="#data-software">Data &amp; Software</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <!--<button class="icon-button" id="theme-toggle" type="button" aria-label="Switch colour theme">☀</button> -->
+<button
+  class="icon-button"
+  id="theme-toggle"
+  type="button"
+  aria-label="Switch to dark theme"
+  title="Switch to dark theme"
+>
+  <span class="theme-icon" aria-hidden="true">☾</span>
+</button>
+      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button></div>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div data-reveal>
+<div class="eyebrow">Post-doc · University of Valle d’Aosta</div>
+<h1>Caterina Morelli</h1>
+<p class="muted">
+        I am a Post-doc at the University of Valle d’Aosta, working remotely
+        on energy and tourism in fragile mountain areas. I recently earned my Ph.D. in Economics,
+        Statistics and Data Science at the University of Milano-Bicocca.
+      </p>
+<p class="muted">
+        My research combines spatial and spatiotemporal methods to study territorial heterogeneity,
+        greenhouse gas emissions, corporate sustainability, energy use and tourism flows. I am always
+        happy to connect around new research collaborations, visiting opportunities and international
+        academic experiences.
+      </p>
+<div class="buttons">
+<a class="btn primary" href="cv.pdf" target="_blank">Download CV</a>
+<a class="btn" href="https://scholar.google.com/citations?user=kZ2ZM-UAAAAJ&amp;hl=it" target="_blank">Google Scholar</a>
+<a class="btn" href="https://www.linkedin.com/in/caterina-morelli-49433b184/" target="_blank">LinkedIn</a>
+</div>
+</div>
+      <div class="hero-visual" data-reveal><div class="portrait-card">
+<img alt="Portrait of Caterina Morelli" class="photo" src="profile.jpg"/>
+</div></div>
+    </div>
+  </section>
+
+  <section class="content-section" id="about"><div class="container">
+    <div class="section-head" data-reveal><h2>About me</h2><p></p></div>
+<article class="panel content-card about-copy" data-reveal>
+  <p class="muted">
+    I was born in 1996 in Macerata, a small town in the Marche region of central Italy, nestled between the Adriatic Sea and the Apennine Mountains. Growing up in a large family taught me the importance of curiosity, kindness and sharing ideas, while encouraging me to become independent and explore the world.
+  </p>
+  <p class="muted">
+    My academic journey has taken me across Italy and beyond. I earned my Bachelor's degree in Economics in Ancona, including an unforgettable Erasmus experience in Castellón de la Plana, before moving to Rimini for a Master's degree in Statistical, Financial and Actuarial Sciences. These years brought new friendships, inspiring flatmates, plenty of travelling and, of course, a great deal of studying.
+  </p>
+  <p class="muted">
+    After graduation, I worked briefly as a consultant at Deloitte, where I learned to manage pressure and approach complex problems. Although it was a valuable experience, I soon realised that I was more interested in asking new questions than in simply answering existing ones, which led me to pursue a Ph.D.
+  </p>
+  <p class="muted">
+    At the University of Milano-Bicocca, I completed a Ph.D. in Economics, Statistics and Data Science, strengthening my interdisciplinary background through environmental and sustainability applications. Travelling also shaped my research interests: experiencing remarkable natural landscapes, while witnessing the environmental challenges faced by many places, increased my interest in using data and quantitative methods to support more sustainable policies.
+  </p>
+  <p class="muted">
+    My Ph.D. years also brought valuable collaborations, lasting friendships and people with whom I continue to share my passion for research and travelling. After completing my Ph.D. in 2026, I joined the University of Valle d'Aosta as a Postdoctoral Research Fellow, where I currently work on the SMARTDECO project, investigating energy efficiency and tourism in fragile mountain areas.
+  </p>
+</article>
+  </div></section>
+
+  <section class="content-section" id="education"><div class="container">
+    <div class="section-head" data-reveal><h2>Education</h2><p></p></div>
+    <div class="timeline"><article class="timeline-item" data-reveal>
+      <div class="timeline-date">Nov 2021 – Feb 2026  PhD with honours</div>
+      <div class="timeline-content"><p><span style="font-size:22px; font-weight:700; color:ink">Ph.D.</span>&nbsp;&nbsp;<strong>Economics, Statistics and Data Science</strong><br/>
+        University of Milano-Bicocca, Milan, Italy</p>
+        <p class="meta">Supervisors: Paolo Maranzano (University of Milan-Bicocca), Philipp Otto (University of Glasgow)</p>
+        <p class="meta"><a href="https://tesidottorato.depositolegale.it/handle/20.500.14242/358527">Thesis: Sustainability by Proximity: How Geographic Closeness Drives Corporate and Regional Carbon Emissions</a></p></div>
+    </article><article class="timeline-item" data-reveal>
+      <div class="timeline-date">Nov 2018 – Oct 2020  110/110 with honours</div>
+      <div class="timeline-content"><p><span style="font-size:22px; font-weight:700; color:ink">M.Sc.</span>&nbsp;&nbsp;<strong>Statistical, Financial and Actuarial Sciences</strong><br/>
+        Alma Mater Studiorum – University of Bologna, Rimini, Italy</p><p class="meta">Thesis: The impact of sustainability awards on firm’s market value: the case of SEAL Business Award</p></div>
+    </article><article class="timeline-item" data-reveal>
+      <div class="timeline-date">Sep 2015 – Jul 2018  110/110 with honours</div>
+      <div class="timeline-content"><p><span style="font-size:22px; font-weight:700; color:ink">B.A.</span>&nbsp;&nbsp;<strong>Economics and Commerce</strong><br/>
+        Marche Polytechnic University, Ancona, Italy</p><p class="meta">Thesis: Wellbeing is not evaluated in euros: correlation between GDP and BES</p></div>
+    </article></div>
+  </div></section>
+
+  <section class="content-section" id="research"><div class="container">
+    <div class="section-head" data-reveal><h2>Current research</h2><p></p></div>
+ 
+         <div class="research-map" data-reveal>
+      <img
+        src="mappa_ricerca2.png"
+        alt="Conceptual map of current research topics"
+      >
+    </div>
+
+    <div class="panel content-card working-panel" >
+<h3>Working papers</h3>
+<ul class="clean">
+<li class="item">
+<div class="item-title">Cluster-wise spatiotemporal panel models for global and local spillovers identification</div>
+<div class="meta">C. Morelli, P. Maranzano, R. Mattera, P. Otto · Preliminary draft available upon request</div>
+</li>
+<li class="item">
+<div class="item-title">The role of Chinese Panda Ambassadors in International Trade</div>
+<div class="meta">M. Longhi, C. Morelli · DEMS Working Paper 550, 2025</div>
+</li>
+</ul>
+</div>
+  </div></section>
+
+  <section class="content-section" id="research"><div class="container">
+    <div class="publication-stack"><div class="panel content-card" data-reveal="">
+<h3>Peer-reviewed articles</h3>
+<ul class="clean">
+  <li class="item">
+<div class="item-title">Forecast reconciliation of agricultural GHG emissions in Europe with fuzzy clustering</div>
+<div class="meta">P. Maranzano, R. Mattera, C. Morelli, G. Scepi · <i>Accepted in Annals of Operations Research</i></div>
+</li>
+<li class="item">
+<div class="item-title">
+            Spatiotemporal clustering of GHGs emissions in Europe: exploring the role of spatial component
+          </div>
+<div class="meta">
+            C. Morelli, P. Maranzano, P. Otto · <i>Spatial Statistics,</i> 2026 ·
+            <a href="https://doi.org/10.1016/j.spasta.2026.100960" target="_blank">doi.org/10.1016/j.spasta.2026.100960</a>
+</div>
+</li>
+<li class="item">
+<div class="item-title">
+            ESG Performance and Stock Market Responses to Geopolitical Turmoil: evidence from the Russia-Ukraine War
+          </div>
+<div class="meta">
+            S. Boccaletti, P. Maranzano, C. Morelli, E. Ossola ·<i> Economic Modelling,</i> 2025 ·
+            <a href="https://doi.org/10.1016/j.econmod.2025.107380" target="_blank">doi.org/10.1016/j.econmod.2025.107380</a>
+</div>
+</li>
+<li class="item">
+<div class="item-title">
+            Multidimensional spatiotemporal clustering: an application to environmental sustainability scores in Europe
+          </div>
+<div class="meta">
+            C. Morelli, S. Boccaletti, P. Maranzano, P. Otto · <i>Environmetrics,</i> 2025 ·
+            <a href="https://onlinelibrary.wiley.com/doi/10.1002/env.2893" target="_blank">doi.org/10.1002/env.2893</a>
+</div>
+</li>
+<li class="item">
+<div class="item-title">
+            Assessing geographical differences of the COVID-19 impact on fuel consumption: the case of Italy
+          </div>
+<div class="meta">
+            R. Borgoni, M. Denova, P. Maranzano, C. Morelli ·<i> Letters in Spatial and Resource Sciences,</i> 2023 ·
+            <a href="https://link.springer.com/article/10.1007/s12076-023-00361-9" target="_blank">10.1007/s12076-023-00361-9</a>
+</div>
+</li>
+</ul>
+</div><div class="panel content-card" data-reveal="">
+<h3>Short papers &amp; Book of abstracts</h3>
+<ul class="clean">
+<li class="item">
+<div class="item-title">
+            Tourist Spending Capacity and Greenhouse Gas Emissions: Evidence from European NUTS2 Regions
+          </div>
+<div class="meta">
+            C. Morelli · Book of short papers, 2026 ·
+            <a href="https://iris.unimore.it/bitstream/11380/1412012/1/ices_2026_bari_book_of_short_papers-1_compressed.pdf?__cf_chl_f_tk=f9bDtX2dCqBl31sF2e8rVkTDXIajj3ccQbMCHqF4DpI-1783424402-1.0.1.1-e7tgtkmTxIOwLLNOzF39pa3DxJchValUCz0xOUk38m4#page=229" target="_blank">ICES 2026 - 4th International Conference on Economic Statistics</a>
+</div>
+</li>
+</ul>
+</div><div class="panel content-card" data-reveal="">
+<h3>Reviewer for</h3>
+<p>
+        Economic Modelling · Annals of Operations Research · International Journal of Climate Change Strategies and Management ·
+        Humanities and Social Sciences Communications · Economics of Disaster and Climate Change ·
+        Communications in Statistics - Theory and Methods
+      </p>
+</div></div>
+  </div></section>
+
+  <section class="content-section" id="network"><div class="container">
+    <div class="section-head" data-reveal><h2>Network, visits &amp; conferences</h2><p></p></div>
+    <div class="network-stack"><div class="panel content-card" data-reveal="">
+<h3>Visiting periods</h3>
+<ul class="clean">
+<li class="item"><b>University of Valencia, Spain</b><br/><span class="meta">Apr–May 2026</span></li>
+<li class="item"><b>University of Glasgow, UK</b><br/><span class="meta">Apr–Sep 2024</span></li>
+<li class="item"><b>Bocconi University, Milan, Italy</b><br/><span class="meta">Oct 2023–Jan 2024</span></li>
+<li class="item"><b>Universitat Jaume I, Spain</b><br/><span class="meta">Erasmus+, Sep 2017–Jan 2018</span></li>
+</ul>
+</div><div class="panel content-card" data-reveal="">
+<h3>Conferences &amp; Workshops</h3>
+<h4>2026</h4>
+<ul class="conference-list">
+<li><b>ERSA Congress</b>, Sofia University, Bulgaria <span>• Aug 2026 • Presenter</span></li>
+<li><b>EcoMod</b>, University of Luxembourg, Luxembourg <span>• Jul 2026 • Presenter</span></li>
+<li><b>SIS Conference</b>, Sapienza University of Rome, Italy <span>• Jun 2026 • Presenter</span></li>
+<li><b>Milan PhD Economic Workshop</b>, Bocconi University, Italy <span>• May 2026 • Presenter</span></li>
+<li><b>Seminar</b>, University of Valencia, Spain <span>• May 2026 • Presenter</span></li>
+<li><b>ICES SIS</b>, University of Bari, Italy <span>• Feb 2026 • Presenter</span></li>
+<li><b>IWEEE SIdE</b>, Marche Polytechnic University, Italy <span>• Jan 2026 • Poster</span></li>
+</ul>
+<h4>2025</h4>
+<ul class="conference-list">
+<li><b>AISRe</b>, University of Chieti–Pescara, Italy <span>• Sep 2025 • Presenter</span></li>
+<li><b>IES</b>, University of Padua, Bressanone-Brixen, Italy <span>• Jun 2025 • Presenter (Invited Session)</span></li>
+<li><b>ICEEP / CefES</b>, University of Milano-Bicocca, Italy <span>• Jun 2025 • Presenter</span></li>
+<li><b>SEEDS Conference</b>, Catholic University of the Sacred Heart, Milan, Italy <span>• May 2025 • Presenter</span></li>
+<li><b>ReLunch Seminar</b>, University of Milano-Bicocca, Italy <span>• May 2025 • Presenter</span></li>
+<li><b>SEA</b>, Mohammed V University, Rabat, Morocco <span>• May 2025 • Discussant &amp; Presenter</span></li>
+<li><b>IAERE Conference</b>, Roma Tre University, Rome, Italy <span>• Feb 2025 • Presenter</span></li>
+</ul>
+<h4>2024</h4>
+<ul class="conference-list">
+<li><b>CfeCms</b>, King's College London, UK <span>• Dec 2024 • Presenter &amp; Session Organizer</span></li>
+<li><b>Milan PhD Economic Workshop</b>, University of Milano-Bicocca, Italy <span>• Sep 2024 • Presenter</span></li>
+<li><b>MBC2</b>, University of Catania, Italy <span>• Aug 2024 • Poster</span></li>
+<li><b>METMA XI</b>, Lancaster University, UK <span>• Jul 2024 • Poster</span></li>
+<li><b>ICEEP / CefES</b>, ETH Zürich, Switzerland <span>• Jun 2024 • Presenter</span></li>
+<li><b>Statistics Seminar</b>, University of Glasgow, UK <span>• Jun 2024 • Presenter</span></li>
+<li><b>PhD Seminar</b>, University of Milano-Bicocca, Italy <span>• Feb 2024 • Presenter</span></li>
+<li><b>IWEEE SIdE</b>, Free University of Bozen-Bolzano, Italy <span>• Jan 2024 • Presenter</span></li>
+</ul>
+<h4>2023</h4>
+<ul class="conference-list">
+<li><b>ERSA Congress</b>, University of Alicante, Spain <span>• Aug 2023 • Presenter</span></li>
+<li><b>Milan PhD Economic Workshop</b>, University of Milan, Italy <span>• Jun 2023 • Presenter</span></li>
+</ul>
+</div></div>
+  </div></section>
+
+<section class="content-section" id="project">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Research Projects</h2><br>
+      <p>Below are the research projects in which I have been involved and to which I have contributed.</p>
+    </div>
+
+    <div class="research-grid">
+      <article class="paper-card featured project-card" data-reveal>
+        <h3>SMARTDECO</h3>
+        <dl class="project-details">
+          <div class="project-detail"><dt>Position</dt><dd>Research Fellow</dd></div>
+          <div class="project-detail"><dt>Period</dt><dd>December 2025 – June 2027</dd></div>
+          <div class="project-detail"><dt>Institution</dt><dd>University of Valle d'Aosta</dd></div>
+        </dl>
+        <div class="project-description">
+          <span class="project-label">Description</span>
+          <p><em>Energy and Tourism in Fragile Mountain Areas: Strategies and Methodologies for Decoupling</em> is a research project funded under the <em>“R&amp;D Aggregations – Ecological Transition”</em> call of the ERDF Valle d'Aosta 2021–2027 programme. My contribution focuses on the empirical analysis of the environmental and energy impacts of tourism in Valle d'Aosta, considering the heterogeneous effects of different tourism segments and the role of accommodation and bed concentration in energy efficiency.</p>
+        </div>
+      </article>
+
+      <article class="paper-card project-card" data-reveal>
+        <h3>WebSite Premia</h3>
+        <dl class="project-details">
+          <div class="project-detail"><dt>Position</dt><dd>Research Assistant</dd></div>
+          <div class="project-detail"><dt>Period</dt><dd>December 2024 – June 2025</dd></div>
+          <div class="project-detail"><dt>Institution</dt><dd>University of Milano-Bicocca</dd></div>
+        </dl>
+        <div class="project-description">
+          <span class="project-label">Description</span>
+          <p>My contribution concerned the empirical analysis of the relationship between website quality, productivity, and financial performance among small and medium-sized enterprises in Italy, combining information on firms’ websites with accounting and balance-sheet data.</p>
+        </div>
+      </article>
+
+      <article class="paper-card project-card" data-reveal>
+        <h3>CIPN CARE</h3>
+        <dl class="project-details">
+          <div class="project-detail"><dt>Position</dt><dd>Research Assistant</dd></div>
+          <div class="project-detail"><dt>Period</dt><dd>December 2022 – July 2023</dd></div>
+          <div class="project-detail"><dt>Institution</dt><dd>University of Milano-Bicocca</dd></div>
+        </dl>
+        <div class="project-description">
+          <span class="project-label">Description</span>
+          <p>Within the project <em>Peripheral Neuropathy from Chemotherapy: Why Should We Care?</em>, my contribution involved the analysis of hospital data to assess the relevance and healthcare costs associated with chemotherapy-induced peripheral neuropathy.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <section class="content-section" id="data-software"><div class="container">
+    <div class="section-head" data-reveal><h2>Datasets &amp; software</h2><p></p></div>
+    <div class="three-grid"><div class="panel content-card" data-reveal="">
+<h3>Data experience</h3>
+<p>Firm-level, socio-economic, trade, financial, ESG, environmental and energy consumption datasets.</p>
+</div><div class="panel content-card" data-reveal="">
+<h3>Sources used</h3>
+<p>
+          Orbis, AIDA, ARDECO, Eurostat, Istat, UN Comtrade, WDI, CEPII-BACI,
+          MSCI ESG Ratings, Refinitiv, FactSet, Bloomberg, EDGAR, EEA.
+        </p>
+</div><div class="panel content-card" data-reveal="">
+<h3>Software</h3>
+<p>
+          Advanced: R, LaTeX, Microsoft 365. Intermediate: Stata, Python, VBA.
+          Basic: MySQL, Gretl, Matlab, Dynare.
+        </p>
+</div></div>
+    <div style="margin-top:18px"><div class="panel content-card" >
+<h3>R package contribution</h3>
+<p>
+        Contributor to HSTC functions for hierarchical spatiotemporal cluster analysis
+        of high-dimensional data in the SCDA R package.
+      </p>
+</div></div>
+  </div></section>
+
+  <section class="content-section" id="teaching">
+  <div class="container">
+
+    <div class="section-head" data-reveal>
+      <h2>Teaching</h2><br>
+      <p>Below the courses for which I worked as a Teaching Assistant. My responsibilities included exercise sessions, assisting during examinations, 
+        <br> supporting students with group research projects, and providing individual tutoring to students with Specific Learning Disorders.</p>
+ </div>
+    <div class="panel content-card" data-reveal>
+      <ul class="clean">
+        <li class="item">
+          <div class="item-title">Bocconi University</div>
+          <div class="meta">
+            <strong>2024/25</strong> · Statistics (Bachelor's degree)
+          </div>
+        </li>
+
+        <li class="item">
+          <div class="item-title">University of Milano-Bicocca</div>
+          <div class="meta">
+            <strong>2024/25</strong> · Econometrics  (Master's degree)<br>
+            <strong>2022/23/24/25</strong> · Statistics II  (Bachelor's degree)<br>
+          </div>
+        </li>
+        <li class="item">
+          <div class="item-title">University of Milan</div>
+          <div class="meta">
+            <strong>2022/23/24/25</strong> · Statistics (Bachelor's degree)<br>
+            <strong>2022/23</strong> · Mathematics (Bachelor's degree)<br>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <section class="content-section" id="map"><div class="container">
+    <div class="section-head" data-reveal><h2>Places I have lived in, visited, learned from</h2><br><p>Dark purple pins mark places where I lived in; pink pins mark travel, conferences,
+      workshops and memories. <br>Hover over the pins, you may see city keywords.</p></div>
+    <div id="travel-map"></div>
+    <div class="map-legend">
+<span class="legend-pill">● Dark purple pin = lived / longer stay</span>
+<span class="legend-pill">● Pink pin = travel / conference / visit</span>
+<span class="legend-pill">Scroll or use + / − to zoom</span>
+</div>
+  </div></section>
+
+<section class="content-section" id="contact">
+  <div class="container">
+    <div class="contact-panel" data-reveal>
+      <div class="contact-heading">
+        <span class="contact-kicker">Get in touch</span> <h2>Contact</h2>
+      </div>
+      <div class="contact-card">
+        <div class="contact-block">
+          <span class="contact-label">Affiliation</span>
+          <p class="contact-main university-name">Università della Valle d'Aosta – Université de la Vallée d'Aoste</p>
+          <p class="contact-secondary">Department of Political and Economic Sciences</p>
+        </div>
+        <div class="contact-separator"></div>
+        <div class="contact-block">
+          <span class="contact-label">Institutional email</span>
+          <a class="contact-email" href="mailto:c.morelli@univda.it"> c.morelli@univda.it </a>
+        </div>
+        <div class="contact-links">
+          <a href="cv.pdf" target="_blank" rel="noopener noreferrer">CV <span aria-hidden="true">↗</span> </a>
+          <a href="https://scholar.google.com/citations?user=kZ2ZM-UAAAAJ&amp;hl=it" target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span> </a>
+          <a href="https://www.linkedin.com/in/caterina-morelli-49433b184/" target="_blank" rel="noopener noreferrer"> LinkedIn <span aria-hidden="true">↗</span> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+
+</main>
+<footer>
+  © <span id="year"></span> Caterina Morelli · Postdoctoral Researcher.
+</footer>
+<script>
+  const header = document.querySelector(".site-header");
+  const menu = document.getElementById("menu-toggle");
+  const links = document.getElementById("nav-links");
+
+  menu.addEventListener("click", () => {
+    const open = links.classList.toggle("is-open");
+    menu.setAttribute("aria-expanded", String(open));
+  });
+
+  links.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      links.classList.remove("is-open");
+      menu.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  window.addEventListener(
+    "scroll",
+    () => header.classList.toggle("is-scrolled", window.scrollY > 12),
+    { passive: true }
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document
+    .querySelectorAll("[data-reveal]")
+    .forEach((element) => observer.observe(element));
+</script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const map = L.map("travel-map", { scrollWheelZoom:true }).setView([28, 0], 2.5);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom:18,
+    attribution:"&copy; OpenStreetMap contributors"
+  }).addTo(map);
+
+  const livedIcon = L.divIcon({
+    className:"",
+    html:'<div class="pin-lived"></div>',
+    iconSize:[28,28],
+    iconAnchor:[14,28],
+    popupAnchor:[0,-26]
+  });
+
+  const travelIcon = L.divIcon({
+    className:"",
+    html:'<div class="pin-travel"></div>',
+    iconSize:[28,28],
+    iconAnchor:[14,28],
+    popupAnchor:[0,-26]
+  });
+
+  const places = [
+    {city:"Malta", lat:35.9375, lng:14.3754, type:"travel", keywords:["Valletta", "Mdina",  "pastizzi", "British tourists"]},
+    {city:"Palma de Mallorca, Spain", lat:39.5696, lng:2.6502, type:"travel", keywords:["La Seu Cathedral", "Bellver Castle", "Almudaina Palace", "ensaimada", "sobrasada", "Serra de Tramuntana"]},
+    {city:"Ávila, Spain", lat:40.6565, lng:-4.6812, type:"travel", keywords:["medieval walls", "Los Cuatro Postes",  "Romanesque churches", "Castilian granite"]},
+    {city:"Toledo, Spain", lat:39.8628, lng:-4.0273, type:"travel", keywords:["Three Cultures", "damascene metalwork", "Toledo steel", "Toledo marzipan", "El Greco", "Alcázar"]},
+    {city:"São Paulo, Brazil", lat:-23.5558, lng:-46.6396, type:"travel", keywords:["Avenida Paulista", "MASP", "Ibirapuera Park", "Liberdade", "Beco do Batman", "Mercadão"]},
+    {city:"Tibau do Sul, Brazil", lat:-6.1866, lng:-35.0862, type:"travel", keywords:["Lagoa de Guaraíras", "Cacimbinhas cliffs", "Madeiro Beach", "mangroves", "dolphins", "kiteboarding"]},
+    {city:"Pipa, Brazil", lat:-6.2284, lng:-35.0484, type:"travel", keywords:["Baía dos Golfinhos", "Praia do Amor", "sleep on the brach", "sea turtles"]},
+    {city:"São Miguel do Gostoso, Brazil", lat:-5.1230, lng:-35.6352, type:"travel", keywords:["Ponta do Santo Cristo", "Tourinhos Beach", "Praia da Xêpa", "Cardeiro lagoon",]},
+    {city:"Santiago de Chile, Chile", lat:-33.4489, lng:-70.6693, type:"travel", keywords:["Cerro San Cristóbal", "protest", "Barrio Bellavista", "red wine"]},
+    {city:"Valparaíso, Chile", lat:-33.0472, lng:-71.6127, type:"travel", keywords:["Cerro Alegre", "Cerro Concepción", "La Sebastiana", "port murals", "colorful stairways"]},
+    {city:"Viña del Mar, Chile", lat:-33.0245, lng:-71.5518, type:"travel", keywords:["beautiful place", "beautiful sunset", "beautiful beach"]},
+    {city:"Concón, Chile", lat:-32.9295, lng:-71.5188, type:"travel", keywords:["rico mojito nutritivo", "dunes"]},
+    {city:"Neuquén, Argentina", lat:-38.9516, lng:-68.0591, type:"travel", keywords:["Limay River", "Neuquén River", "Patagonian wineries"]},
+    {city:"General Roca, Río Negro, Argentina", lat:-39.0333, lng:-67.5833, type:"travel", keywords:["Alto Valle", "apple orchards", "pear orchards", "Fiesta de la Manzana"]},
+
+    {city:"Roma, Italy", lat:41.9028, lng:12.4964, type:"travel", keywords:[ "Trastevere", "always carbonara", "supplì"]},
+    {city:"Paris, France", lat:48.8566, lng:2.3522, type:"travel", keywords:[ "Pain au chocolat", "Montmartre","raclette"]},
+    {city:"Napoli, Italy", lat:40.8518, lng:14.2681, type:"travel", keywords:["Margherita", "Quartieri Spagnoli", "Vesuvius", "Lungomare Caracciolo"]},
+    {city:"Venezia, Italy", lat:45.4408, lng:12.3155, type:"travel", keywords:["bacari", "cicchetti", "Rialto Market", "calle"]},
+    {city:"Firenze, Italy", lat:43.7696, lng:11.2558, type:"travel", keywords:["Uffizi", "Brunelleschi’s Dome", "Ponte Vecchio", "schiacciata", "Renaissance"]},
+    {city:"Bologna, Italy", lat:44.4949, lng:11.3426, type:"travel", keywords:["Two Towers", "tagliatelle al ragù", "mortadella"]},
+    {city:"Verona, Italy", lat:45.4384, lng:10.9916, type:"travel", keywords:["Arena di Verona", "Juliet’s balcony", "Valpolicella", "Amarone"]},
+    {city:"Padova, Italy", lat:45.4064, lng:11.8768, type:"travel", keywords:[ "Scrovegni Chapel", "Saint Anthony’s Basilica", "spritz for breakfast"]},
+    {city:"Torino, Italy", lat:45.0703, lng:7.6869, type:"travel", keywords:["Mole Antonelliana","Piazza Castello", "tartare di fassona", "gianduiotti", "Tajarin"]},
+    /*{city:"Cuneo, Italy", lat:44.3845, lng:7.5427, type:"travel", keywords:[""]}, */
+    {city:"Aosta, Italy", lat:45.7370, lng:7.3201, type:"travel", keywords:[ "La Stella", "Porta Praetoria", "Blu d'Aosta cheese", "tegole valdostane", "trying to speak French"]},
+    {city:"Pescara, Italy", lat:42.4618, lng:14.2161, type:"travel", keywords:["Ponte del Mare", "arrosticini", "pallotte"]},
+    {city:"Perugia, Italy", lat:43.1107, lng:12.3908, type:"travel", keywords:["Etruscan Arch", "Perugina chocolate", "Eurochocolate", "torta al testo"]},
+    {city:"Terni, Italy", lat:42.5636, lng:12.6427, type:"travel", keywords:["Marmore Falls", "Saint Valentine", "Nera River"]},
+    {city:"Pesaro, Italy", lat:43.9125, lng:12.9155, type:"travel", keywords:["Pomodoro", "Adriatic cycling", "vespa"]},
+    {city:"Urbino, Italy", lat:43.7262, lng:12.6363, type:"travel", keywords:[ "crescia sfogliata"]},
+    {city:"Catania, Italy", lat:37.5079, lng:15.0830, type:"travel", keywords:["Pistacchio", "wine session", "pasta alla Norma", "Etna volcanic dust"]},
+    {city:"Bari, Italy", lat:41.1171, lng:16.8719, type:"travel", keywords:["Bari Vecchia", "orecchiette", "focaccia barese", "Basilica di San Nicola", "santini everywhere"]},
+    {city:"Novara, Italy", lat:45.4469, lng:8.6222, type:"travel", keywords:[""]},
+    {city:"Varese, Italy", lat:45.8206, lng:8.8251, type:"travel", keywords:["Sacro Monte", "Campo dei Fiori", "Garden City",  "brutti e buoni", "ice skating"]},
+    {city:"Como, Italy", lat:45.8081, lng:9.0852, type:"travel", keywords:["Lake Como", "mercatini di Natale", "Como Cathedral", "silk production"]},
+    {city:"Parma, Italy", lat:44.8015, lng:10.3279, type:"travel", keywords:["Parmigiano Reggiano", "Prosciutto di Parma", "tortelli d’erbetta"]},
+    {city:"Genova, Italy", lat:44.4056, lng:8.9463, type:"travel", keywords:["Genoa Aquarium",  "focaccia e cappuccino", "farinata"]},
+    {city:"Lucca, Italy", lat:43.8429, lng:10.5027, type:"travel", keywords:["Renaissance walls", "Lucca Comix"]},
+    {city:"San Marino", lat:43.9424, lng:12.4578, type:"travel", keywords:["Guaita Tower", "Cesta Tower", "Passo delle Streghe", "Mount Titano", "torta Tre Monti", "stamps and coins", "panoramic cable car"]},
+    {city:"Ravenna, Italy", lat:44.4184, lng:12.2035, type:"travel", keywords:["Byzantine mosaics", "San Vitale", "Battistero"]},
+    {city:"Trento, Italy", lat:46.0748, lng:11.1217, type:"travel", keywords:["Buonconsiglio Castle", "MUSE", "apple strudel"]},
+    {city:"Bolzano, Italy", lat:46.4983, lng:11.3548, type:"travel", keywords:["Waltherplatz", "South Tyrolean speck", "canederli"]},
+    {city:"Ascoli Piceno, Italy", lat:42.8536, lng:13.5749, type:"travel", keywords:["Piazza del Popolo", "travertine architecture", "olive all’ascolana", "Caffè Meletti"]},
+
+    {city:"Madrid, Spain", lat:40.4168, lng:-3.7038, type:"travel", keywords:["bocadillo de calamares"]},
+    {city:"Barcelona, Spain", lat:41.3874, lng:2.1686, type:"travel", keywords:["Gaudí", "Mediterranean", "walks", "design"]},
+    {city:"Sevilla, Spain", lat:37.3891, lng:-5.9845, type:"travel", keywords:["Andalusia", "flamenco", "sun", "architecture"]},
+    {city:"Malaga, Spain", lat:36.7213, lng:-4.4214, type:"travel", keywords:["sea", "Andalusia", "art", "sun"]},
+    {city:"Ronda, Spain", lat:36.7462, lng:-5.1612, type:"travel", keywords:["views", "bridge", "Andalusia", "road trip"]},
+    {city:"Cordoba, Spain", lat:37.8882, lng:-4.7794, type:"travel", keywords:["Mezquita", "history", "patios", "Andalusia"]},
+    {city:"Granada, Spain", lat:37.1773, lng:-3.5986, type:"travel", keywords:["Alhambra", "tapas", "views", "Andalusia"]},
+    {city:"Alicante, Spain", lat:38.3452, lng:-0.4810, type:"travel", keywords:["ERSA", "conference", "sea", "Spain"]},
+
+    {city:"San Francisco, USA", lat:37.7749, lng:-122.4194, type:"travel", keywords:["Golden Gate", "Lombard Street", "Pier39"]},
+    {city:"Berkeley, USA", lat:37.8715, lng:-122.2730, type:"travel", keywords:["campus"]},
+    {city:"Yosemite National Park, USA", lat:37.8651, lng:-119.5383, type:"travel", keywords:["Watch out for bears", "cottage", "tons of waffles"]},
+    {city:"New York, USA", lat:40.7128, lng:-74.0060, type:"travel", keywords:["highline", "mac and cheese", "Ellis Island", "snowstorm"]},
+    {city:"Boston, USA", lat:42.3601, lng:-71.0589, type:"travel", keywords:["university", "wild turkeys", "harbor"]},
+    {city:"Atlanta, USA", lat:33.7490, lng:-84.3880, type:"travel", keywords:[]},
+    {city:"Miami, USA", lat:25.7617, lng:-80.1918, type:"travel", keywords:["rainbow", "beach", "very rich peaple"]},
+    {city:"Washington, DC, USA", lat:38.9072, lng:-77.0369, type:"travel", keywords:["museums", "monuments", "capital"]},
+    {city:"Philadelphia, USA", lat:39.9526, lng:-75.1652, type:"travel", keywords:[]},
+
+    {city:"Dublin, Ireland", lat:53.3498, lng:-6.2603, type:"travel", keywords:["pubs", "rain", "literature", "Ireland"]},
+    {city:"Howth, Ireland", lat:53.3868, lng:-6.0654, type:"travel", keywords:["cliffs", "Dublin area", "sea", "walks"]},
+    {city:"London, UK", lat:51.5072, lng:-0.1276, type:"travel", keywords:["", "conference", "museums", "statistics"]},
+    {city:"Lancaster, UK", lat:54.0466, lng:-2.8007, type:"travel", keywords:["university campus"]},
+    {city:"Edinburgh, UK", lat:55.9533, lng:-3.1883, type:"travel", keywords:["castle", "Scotland", "walks", "views"]},
+    {city:"Fort William, UK", lat:56.8198, lng:-5.1052, type:"travel", keywords:["Highlands", "Scotland", "mountains", "nature"]},
+    {city:"Irvine, UK", lat:55.6116, lng:-4.6696, type:"travel", keywords:["Scotland", "coast", "Glasgow area", "walks"]},
+    {city:"Marseille, France", lat:43.2965, lng:5.3698, type:"travel", keywords:["lavander", "harbor", "soap"]},
+    {city:"Lisbon, Portugal", lat:38.7223, lng:-9.1393, type:"travel", keywords:["pastéis de nata"]},
+    {city:"Fátima, Portugal", lat:39.6172, lng:-8.6521, type:"travel", keywords:["sanctuary", "Portugal", "quiet", "travel"]},
+
+    {city:"Sal, Cape Verde", lat:16.7266, lng:-22.9297, type:"travel", keywords:["island", "ocean", "wind", "Cape Verde"]},
+    {city:"Tenerife, Spain", lat:28.2916, lng:-16.6291, type:"travel", keywords:["volcano", "island", "ocean", "Canaries"]},
+    {city:"Lanzarote, Spain", lat:29.0469, lng:-13.5899, type:"travel", keywords:["lava", "island", "landscapes", "Canaries"]},
+
+    {city:"Rabat, Morocco", lat:34.0209, lng:-6.8416, type:"travel", keywords:["SEA", "conference", "Morocco", "discussion"]},
+    {city:"Fez, Morocco", lat:34.0181, lng:-5.0078, type:"travel", keywords:["medina", "history", "crafts", "Morocco"]},
+    {city:"Marrakech, Morocco", lat:31.6295, lng:-7.9811, type:"travel", keywords:["colors", "souks", "gardens", "Morocco"]},
+    {city:"Casablanca, Morocco", lat:33.5731, lng:-7.5898, type:"travel", keywords:["architecture", "ocean", "Morocco", "city"]},
+
+    {city:"Luxembourg, Luxembourg", lat:49.6116, lng:6.1319, type:"travel", keywords:["EcoMod", "conference", "Europe", "research"]},
+    {city:"Zurich, Switzerland", lat:47.3769, lng:8.5417, type:"travel", keywords:["ETH", "ICEEP", "lake", "Switzerland"]},
+    {city:"Vienna, Austria", lat:48.2082, lng:16.3738, type:"travel", keywords:["music", "coffee", "architecture", "Austria"]},
+    {city:"Klagenfurt, Austria", lat:46.6247, lng:14.3053, type:"travel", keywords:["lake", "Austria", "mountains", "quiet"]},
+    {city:"Bucharest, Romania", lat:44.4268, lng:26.1025, type:"travel", keywords:["city", "architecture", "Romania", "travel"]},
+    {city:"Budapest, Hungary", lat:47.4979, lng:19.0402, type:"travel", keywords:["Danube", "thermal baths", "bridges", "Hungary"]},
+    {city:"Plovdiv, Bulgaria", lat:42.1354, lng:24.7453, type:"travel", keywords:["old town", "Bulgaria", "culture", "views"]},
+    {city:"Gdańsk, Poland", lat:54.3520, lng:18.6466, type:"travel", keywords:["Baltic", "Poland", "architecture", "harbor"]},
+    {city:"Sopot, Poland", lat:54.4416, lng:18.5601, type:"travel", keywords:["sea", "Baltic", "pier", "Poland"]},
+    {city:"Kraków, Poland", lat:50.0647, lng:19.9450, type:"travel", keywords:["old town", "history", "Poland", "culture"]},
+    {city:"Berlin, Germany", lat:52.5200, lng:13.4050, type:"travel", keywords:["history", "museums", "street art", "Germany"]},
+    {city:"Copenhagen, Denmark", lat:55.6761, lng:12.5683, type:"travel", keywords:["bikes", "cycling", "harbor", "Nordics"]},
+    {city:"Malmö, Sweden", lat:55.6050, lng:13.0038, type:"travel", keywords:["bridge", "Nordics", "sea"]},
+    {city:"Lund, Sweden", lat:55.7047, lng:13.1910, type:"travel", keywords:["university", "Sweden", "quiet"]},
+    {city:"Växjö, Sweden", lat:56.8790, lng:14.8059, type:"travel", keywords:["lakes",  "nature", "no people around"]},
+
+    {city:"Macerata, Italy", lat:43.298, lng:13.453, type:"lived", keywords:["Magerada", "climbs and descents", "Wednesday market", "university Thursday"]},
+    {city:"Ancona, Italy", lat:43.616, lng:13.519, type:"lived", keywords:["Passetto", "piazza del Papa", ""]},
+    {city:"Rimini, Italy", lat:44.067, lng:12.569, type:"lived", keywords:["sunday lunch", "sunset at darsena", "Brezza", "cassone"]},
+    {city:"Milano, Italy", lat:45.464, lng:9.190, type:"lived", keywords:["Palazzo Invernizzi", "Bicocca", ""]},
+    {city:"Valencia, Spain", lat:39.470, lng:-0.376, type:"lived", keywords:["Las Fallas"]},
+    {city:"Castellón de la Plana, Spain", lat:39.986, lng:-0.052, type:"lived", keywords:["Erasmus"]},
+    {city:"Glasgow, UK", lat:55.864, lng:-4.252, type:"lived", keywords:["Gotham city", "drinking", "rain", "botanical garden"]},
+    {city:"Redwood City, California, USA", lat:37.485, lng:-122.236, type:"lived", keywords:["barbecue", "library", "pool party","make up session"]},
+    {city:"Natal, Brazil", lat:-5.794, lng:-35.212, type:"lived", keywords:["tapioca", "Genipabu", "volunteering experience", "Ponta Negra"]},
+    {city:"Gran Canaria, Spain", lat:27.9202, lng:-15.5474, type:"lived", keywords:["perfect place for retirement"]},
+  ];
+
+  places.forEach(place => {
+    const icon = place.type === "lived" ? livedIcon : travelIcon;
+    const keywords = place.keywords.map(k => `<span>${k}</span>`).join(" · ");
+
+    L.marker([place.lat, place.lng], {icon})
+      .addTo(map)
+      .bindTooltip(
+        `<div class="tooltip-city">${place.city}</div><div>${keywords}</div>`,
+        {direction:"top", offset:[0,-20], opacity:1}
+      );
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = themeToggle?.querySelector(".theme-icon");
+    const storageKey = "cate-theme";
+
+    if (!themeToggle || !themeIcon) {
+      console.error("Theme toggle button not found.");
+      return;
+    }
+
+    function readSavedTheme() {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveTheme(theme) {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch (error) {
+        // The switch still works when local storage is unavailable.
+      }
+    }
+
+    const savedTheme = readSavedTheme();
+    root.setAttribute(
+      "data-theme",
+      savedTheme === "dark" || savedTheme === "light"
+        ? savedTheme
+        : "light"
+    );
+
+    function updateThemeButton() {
+      const isDark = root.getAttribute("data-theme") === "dark";
+
+      // The icon indicates the theme that can be activated.
+      themeIcon.textContent = isDark ? "☀" : "☾";
+
+      const label = isDark
+        ? "Switch to light theme"
+        : "Switch to dark theme";
+
+      themeToggle.setAttribute("aria-label", label);
+      themeToggle.setAttribute("title", label);
+    }
+
+    updateThemeButton();
+
+    themeToggle.addEventListener("click", function () {
+      const isDark = root.getAttribute("data-theme") === "dark";
+      const newTheme = isDark ? "light" : "dark";
+
+      root.setAttribute("data-theme", newTheme);
+      saveTheme(newTheme);
+      updateThemeButton();
+    });
+  });
+</script>
+</body>
+</html>
