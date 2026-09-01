@@ -809,6 +809,54 @@ footer{padding:38px 22px 46px;text-align:center;color:var(--muted)}
   }
 }
 
+/* =========================================================
+   PAPER THUMBNAILS
+   ========================================================= */
+
+.paper-item {
+  display: grid;
+  grid-template-columns: 105px minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.paper-thumb {
+  width: 105px;
+  height: 75px;
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.paper-thumb img {
+  width: 100% !important;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.paper-info {
+  min-width: 0;
+}
+
+
+/* Tablet / smartphone */
+@media (max-width: 650px) {
+
+  .paper-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 13px;
+    align-items: center;
+  }
+
+  .paper-thumb {
+    width: 72px;
+    height: 58px;
+    border-radius: 7px;
+  }
+
+}
+
 </style>
 </head>
 <body>
@@ -929,68 +977,212 @@ footer{padding:38px 22px 46px;text-align:center;color:var(--muted)}
   </picture>
 </div>
 
-    <div class="panel content-card working-panel" >
-<h3>Working papers</h3>
-<ul class="clean">
-<li class="item">
-<div class="item-title">Cluster-wise spatiotemporal panel models for global and local spillovers identification</div>
-<div class="meta">C. Morelli, P. Maranzano, R. Mattera, P. Otto · Preliminary draft available upon request</div>
-</li>
-<li class="item">
-<div class="item-title">The role of Chinese Panda Ambassadors in International Trade</div>
-<div class="meta">M. Longhi, C. Morelli · DEMS Working Paper 550, 2025</div>
-</li>
-</ul>
-</div>
-  </div></section>
+<div class="panel content-card working-panel">
+  <h3>Working papers</h3>
+
+  <ul class="clean">
+
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/heter_clu_2026.png"
+          alt="Cluster-wise spatiotemporal panel models"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          Cluster-wise spatiotemporal panel models for global and local spillovers identification
+        </div>
+
+        <div class="meta">
+          C. Morelli, P. Maranzano, R. Mattera, P. Otto ·
+          Preliminary draft available upon request
+        </div>
+      </div>
+
+    </li>
+
+
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/panda_2026.png"
+          alt="The role of Chinese Panda Ambassadors in International Trade"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          The role of Chinese Panda Ambassadors in International Trade
+        </div>
+
+        <div class="meta">
+          M. Longhi, C. Morelli · DEMS Working Paper 550, 2025
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+</div></section>
 
   <section class="content-section" id="research"><div class="container">
     <div class="publication-stack"><div class="panel content-card" data-reveal="">
-<h3>Peer-reviewed articles</h3>
-<ul class="clean">
-  <li class="item">
-<div class="item-title">Forecast reconciliation of agricultural GHG emissions in Europe with fuzzy clustering</div>
-<div class="meta">P. Maranzano, R. Mattera, C. Morelli, G. Scepi · <i>Annals of Operations Research,</i> 2026 ·
-            <a href="https://doi.org/10.1007/s10479-026-07363-y" target="_blank">doi.org/10.1007/s10479-026-07363-y</a>
-</div>
-</li>
-<li class="item">
-<div class="item-title">
-            Spatiotemporal clustering of GHGs emissions in Europe: exploring the role of spatial component
-          </div>
-<div class="meta">
-            C. Morelli, P. Maranzano, P. Otto · <i>Spatial Statistics,</i> 2026 ·
-            <a href="https://doi.org/10.1016/j.spasta.2026.100960" target="_blank">doi.org/10.1016/j.spasta.2026.100960</a>
-</div>
-</li>
-<li class="item">
-<div class="item-title">
-            ESG Performance and Stock Market Responses to Geopolitical Turmoil: evidence from the Russia-Ukraine War
-          </div>
-<div class="meta">
-            S. Boccaletti, P. Maranzano, C. Morelli, E. Ossola ·<i> Economic Modelling,</i> 2025 ·
-            <a href="https://doi.org/10.1016/j.econmod.2025.107380" target="_blank">doi.org/10.1016/j.econmod.2025.107380</a>
-</div>
-</li>
-<li class="item">
-<div class="item-title">
-            Multidimensional spatiotemporal clustering: an application to environmental sustainability scores in Europe
-          </div>
-<div class="meta">
-            C. Morelli, S. Boccaletti, P. Maranzano, P. Otto · <i>Environmetrics,</i> 2025 ·
-            <a href="https://onlinelibrary.wiley.com/doi/10.1002/env.2893" target="_blank">doi.org/10.1002/env.2893</a>
-</div>
-</li>
-<li class="item">
-<div class="item-title">
-            Assessing geographical differences of the COVID-19 impact on fuel consumption: the case of Italy
-          </div>
-<div class="meta">
-            R. Borgoni, M. Denova, P. Maranzano, C. Morelli ·<i> Letters in Spatial and Resource Sciences,</i> 2023 ·
-            <a href="https://link.springer.com/article/10.1007/s12076-023-00361-9" target="_blank">10.1007/s12076-023-00361-9</a>
-</div>
-</li>
-</ul>
+  <h3>Peer-reviewed articles</h3>
+
+  <ul class="clean">
+
+
+    <!-- Annals of Operations Research -->
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/ANOR_2026.png"
+          alt="Forecast reconciliation of agricultural GHG emissions"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          Forecast reconciliation of agricultural GHG emissions in Europe with fuzzy clustering
+        </div>
+
+        <div class="meta">
+          P. Maranzano, R. Mattera, C. Morelli, G. Scepi ·
+          <i>Annals of Operations Research,</i> 2026 ·
+          <a href="https://doi.org/10.1007/s10479-026-07363-y" target="_blank">
+            doi.org/10.1007/s10479-026-07363-y
+          </a>
+        </div>
+      </div>
+
+    </li>
+
+
+    <!-- Spatial Statistics -->
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/spasta_2026.png"
+          alt="Spatiotemporal clustering of GHG emissions in Europe"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          Spatiotemporal clustering of GHGs emissions in Europe:
+          exploring the role of spatial component
+        </div>
+
+        <div class="meta">
+          C. Morelli, P. Maranzano, P. Otto ·
+          <i>Spatial Statistics,</i> 2026 ·
+          <a href="https://doi.org/10.1016/j.spasta.2026.100960" target="_blank">
+            doi.org/10.1016/j.spasta.2026.100960
+          </a>
+        </div>
+      </div>
+
+    </li>
+
+
+    <!-- Economic Modelling -->
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/EcoMod_2025.png"
+          alt="ESG Performance and Stock Market Responses"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          ESG Performance and Stock Market Responses to Geopolitical Turmoil:
+          evidence from the Russia-Ukraine War
+        </div>
+
+        <div class="meta">
+          S. Boccaletti, P. Maranzano, C. Morelli, E. Ossola ·
+          <i>Economic Modelling,</i> 2025 ·
+          <a href="https://doi.org/10.1016/j.econmod.2025.107380" target="_blank">
+            doi.org/10.1016/j.econmod.2025.107380
+          </a>
+        </div>
+      </div>
+
+    </li>
+
+
+    <!-- Environmetrics -->
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/ENV_2025.png"
+          alt="Multidimensional spatiotemporal clustering"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          Multidimensional spatiotemporal clustering:
+          an application to environmental sustainability scores in Europe
+        </div>
+
+        <div class="meta">
+          C. Morelli, S. Boccaletti, P. Maranzano, P. Otto ·
+          <i>Environmetrics,</i> 2025 ·
+          <a href="https://onlinelibrary.wiley.com/doi/10.1002/env.2893" target="_blank">
+            doi.org/10.1002/env.2893
+          </a>
+        </div>
+      </div>
+
+    </li>
+
+
+    <!-- Letters in Spatial and Resource Sciences -->
+    <li class="item paper-item">
+
+      <div class="paper-thumb">
+        <img
+          src="paper_figure/LSRS_2023.png"
+          alt="COVID-19 impact on fuel consumption in Italy"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="paper-info">
+        <div class="item-title">
+          Assessing geographical differences of the COVID-19 impact on fuel consumption:
+          the case of Italy
+        </div>
+
+        <div class="meta">
+          R. Borgoni, M. Denova, P. Maranzano, C. Morelli ·
+          <i>Letters in Spatial and Resource Sciences,</i> 2023 ·
+          <a href="https://link.springer.com/article/10.1007/s12076-023-00361-9" target="_blank">
+            10.1007/s12076-023-00361-9
+          </a>
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+
 </div><div class="panel content-card" data-reveal="">
 <h3>Short papers &amp; Book of abstracts</h3>
 <ul class="clean">
